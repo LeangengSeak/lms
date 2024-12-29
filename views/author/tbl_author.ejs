@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs',{title: 'Table Author'}) %>
+    <%-include('../partials/datatables-styles.ejs') %>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <%- include('../partials/sidebar.ejs') %>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <%- include('../partials/topbar.ejs') %>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <%= JSON.stringify(authors) %>
+            <h1 class="h3 mb-2 text-gray-800">Author</h1>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <span class="m-0 font-weight-bold text-primary"
+                  >DataTables Example</span
+                >
+                <a
+                  href="/authors/create"
+                  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"
+                  ><i class="fas fa-download fa-sm text-white-50"></i> Create</a
+                >
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Author Name</th>
+
+                        <th width="115px">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% authors.forEach((author)=>{ %>
+                      <tr>
+                        <td><%= author.author_id %></td>
+                        <td><%= author.name %></td>
+
+                        <td>
+                          <div>
+                            <!-- Edit Button -->
+                            <a
+                              href="/authors/edit/<%= author.author_id %>"
+                              class="btn btn-success"
+                            >
+                              Edit
+                            </a>
+                            <!-- Delete Button -->
+                            <a
+                              href="/authors/delete/<%= author.author_id %>"
+                              class="btn btn-danger"
+                            >
+                              Delete
+                            </a>
+                          </div>
+                        </td>
+                        <% }) %>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer.ejs') %>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <%- include('../partials/scroll-to-top.ejs') %>
+
+    <!-- Logout Modal-->
+    <%- include('../partials/logoutModal.ejs') %>
+    <%-include('../partials/script.ejs') %>
+    <%-include('../partials/datatables-scripts.ejs') %>
+  </body>
+</html>

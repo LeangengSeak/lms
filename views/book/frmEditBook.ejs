@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs',{title: 'Edit Book'}) %>
+  </head>
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <%- include('../partials/sidebar.ejs') %>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <%- include('../partials/topbar.ejs') %>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid"></div>
+          <!-- /.container-fluid -->
+          <div class="container mt-5">
+            <%= JSON.stringify(book) %> <%= JSON.stringify(authors) %> <%=
+            JSON.stringify(categories) %>
+            <h1 class="h3 mb-4 text-gray-800">Edit Book</h1>
+            <form action="/books/edit" method="post">
+              <!-- Text Input -->
+              <div class="form-group">
+                <input type="hidden" name="bookId" value="<%= book.book_id %>" />
+                <label for="inputName">Book Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="<%= book.name %>"
+                  name="bookName"
+                  id="inputName"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              <!-- Select Option 1 -->
+              <div class="form-group">
+                <label for="selectOption1">Author</label>
+                <select class="form-control" name="author" id="selectOption1">
+                  <option value="">Select your author</option>
+                  <% authors.forEach((author)=>{ %>
+                  <option value="<%= author.author_id %>" <%= book.author_id === author.author_id ? 'selected' : ''%>
+                    > <%= author.name %>
+                  </option>
+                  <%}) %>
+                </select>
+              </div>
+
+              <!-- Select Option 2 -->
+              <div class="form-group">
+                <label for="selectOption2">Category</label>
+                <select class="form-control" name="category" id="selectOption2">
+                  <option value="">Select your category</option>
+                  <% categories.forEach((category)=>{ %>
+                    <option value="<%= category.category_id %>" <%= book.category_id === category.category_id ? 'selected' : '' %>>
+                      <%= category.name %>
+                    </option>
+                 <%  }) %>
+                </select>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div>
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer.ejs') %>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <%- include('../partials/scroll-to-top.ejs') %>
+
+    <!-- Logout Modal-->
+    <%- include('../partials/logoutModal.ejs') %>
+    <%-include('../partials/script.ejs') %>
+  </body>
+</html>
