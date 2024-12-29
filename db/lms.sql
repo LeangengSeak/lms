@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2024 at 05:42 AM
+-- Generation Time: Dec 29, 2024 at 11:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `prolms`
+-- Database: `lms`
 --
 
 -- --------------------------------------------------------
@@ -37,9 +37,11 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`author_id`, `name`) VALUES
-(1, 'leangeng'),
-(2, 'EngEng'),
-(3, 'Leangeng Seak');
+(1, 'J.K. Rowling'),
+(2, 'George R.R. Martin'),
+(3, 'J.R.R. Tolkien'),
+(4, 'Jane Austen'),
+(5, 'Agatha Christie');
 
 -- --------------------------------------------------------
 
@@ -59,10 +61,11 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`book_id`, `name`, `author_id`, `category_id`) VALUES
-(3, 'The KingSwap007 jjjj', 2, 1),
-(4, 'hello world', 1, 2),
-(5, 'Tom and Jerry', 1, 2),
-(6, 'Tom and Jerry', 2, 2);
+(1, 'Harry Potter and the Philosopher\'s Stone', 1, 1),
+(2, 'A Game of Thrones', 2, 1),
+(3, 'The Hobbit', 3, 5),
+(4, 'Pride and Prejudice', 4, 4),
+(5, 'Murder on the Orient Express', 5, 3);
 
 -- --------------------------------------------------------
 
@@ -80,8 +83,11 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `name`) VALUES
-(1, 'development'),
-(2, 'Dev');
+(1, 'Fantasy'),
+(2, 'Fiction'),
+(3, 'Mystery'),
+(4, 'Romance'),
+(5, 'Adventure');
 
 --
 -- Indexes for dumped tables
@@ -115,19 +121,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `book_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `book_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `category_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
