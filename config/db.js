@@ -10,4 +10,12 @@ con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 });
-module.exports = con;
+
+exports.query = (sql, value) => {
+  return new Promise((resolve, reject) => {
+    con.query(sql, value, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    })
+  })
+}

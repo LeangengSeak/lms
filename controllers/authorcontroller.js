@@ -1,57 +1,66 @@
-const con = require('../config/db')
-
-const getAll = (req, res) => {
-    const sql = "SELECT * FROM author";
-    con.query(sql, (err, result) => {
-        if (err) throw err;
+const authorQuery = require('../resources/authorQueries')
+const getAll = async (req, res) => {
+    try {
+        const result = await authorQuery.getAllAuthors();
         res.status(200).render('author/tbl_author', { authors: result })
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
 const getCreate = (req, res) => {
     res.status(200).render('author/frmCreateAuthor')
 }
 
-const postCreate = (req, res) => {
+const postCreate = async (req, res) => {
     const { authorName } = req.body;
     const arrAuthor = [authorName]
-    const sql = "INSERT INTO `author`(`name`) VALUES (?)"
-    con.query(sql, arrAuthor, (err, authorResult) => {
-        if (err) throw err;
+    try {
+        await authorQuery.createAuthor(arrAuthor);
         console.log('Author created!')
         res.redirect('/authors')
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
-const getEdit = (req, res) => {
+const getEdit = async (req, res) => {
     const { id } = req.params;
-    const sql = "SELECT * FROM author WHERE author_id = ?";
-    con.query(sql, id, (err, result) => {
-        if (err) throw err;
-        console.log('Author found!')
-        res.status(200).render('author/frmEditAuthor', { author: result[0] })
-    })
+    try {
+        const result = await authorQuery.getById(id);
+        res.status(200).render('author/frmEditAuthor', { author: result })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
-const postEdit = (req, res) => {
+const postEdit = async (req, res) => {
     const { authorName, authorId } = req.body;
     const arrAuthor = [authorName, authorId]
-    const sql = "UPDATE `author` SET `name`= ? WHERE `author_id` = ?";
-    con.query(sql, arrAuthor, (err, result) => {
-        if (err) throw err;
-        console.log('Author updated')
+    try {
+        await authorQuery.updateAuthor(arrAuthor)
+        console.log('Author updated!')
         res.redirect('/authors')
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
+
 }
 
-const deleteRecord = (req, res) => {
+const deleteRecord = async (req, res) => {
     const { id } = req.params;
-    const sql = "DELETE FROM author WHERE author_id = ?";
-    con.query(sql, id, (err, result) => {
-        if (err) throw err;
-        console.log('Author deleted')
+    try {
+        await authorQuery.deleteAuthor(id)
+        console.log('Author deleted!')
         res.redirect('/authors')
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
 module.exports = {

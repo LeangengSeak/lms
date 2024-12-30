@@ -1,57 +1,66 @@
-const con = require('../config/db')
+const categoryQuery = require('../resources/categoryQueries')
 
-const getAll = (req, res) => {
-    const sql = "SELECT * FROM category";
-    con.query(sql, (err, result) => {
-        if (err) throw err;
+const getAll = async (req, res) => {
+    try {
+        const result = await categoryQuery.getAllCategories();
         res.status(200).render('category/tbl_category', { categories: result })
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
 const getCreate = (req, res) => {
     res.status(200).render('category/frmCreatecategory')
 }
 
-const postCreate = (req, res) => {
+const postCreate = async (req, res) => {
     const { categoryName } = req.body;
     const arrCategory = [categoryName]
-    const sql = "INSERT INTO `category`(`name`) VALUES (?)"
-    con.query(sql, arrCategory, (err, categoryResult) => {
-        if (err) throw err;
+    try {
+        await categoryQuery.createCategory(arrCategory);
         console.log('Category created!')
         res.redirect('/categories')
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
-const getEdit = (req, res) => {
+const getEdit = async (req, res) => {
     const { id } = req.params;
-    const sql = "SELECT * FROM category WHERE category_id = ?";
-    con.query(sql, id, (err, result) => {
-        if (err) throw err;
-        console.log('Category found!')
-        res.status(200).render('category/frmEditcategory', { category: result[0] })
-    })
+    try {
+        const result = await categoryQuery.getById(id);
+        res.status(200).render('category/frmEditcategory', { category: result })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
-const postEdit = (req, res) => {
+const postEdit = async (req, res) => {
     const { categoryName, categoryId } = req.body;
     const arrCategory = [categoryName, categoryId]
-    const sql = "UPDATE `category` SET `name`= ? WHERE `category_id` = ?";
-    con.query(sql, arrCategory, (err, result) => {
-        if (err) throw err;
+    try {
+        await categoryQuery.updateCategory(arrCategory);
         console.log('Category updated!')
         res.redirect('/categories')
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
-const deleteRecord = (req, res) => {
+const deleteRecord = async (req, res) => {
     const { id } = req.params;
-    const sql = "DELETE FROM category WHERE category_id = ?";
-    con.query(sql, id, (err, result) => {
-        if (err) throw err;
+    try {
+        await categoryQuery.deleteCategory(id)
         console.log('Category deleted!')
         res.redirect('/categories')
-    })
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Internal Server Error')
+    }
 }
 
 module.exports = {
