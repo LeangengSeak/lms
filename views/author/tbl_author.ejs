@@ -57,21 +57,21 @@
                     <tbody>
                       <% authors.forEach((author)=>{ %>
                       <tr>
-                        <td><%= author.author_id %></td>
-                        <td><%= author.name %></td>
+                        <td><%= author.id %></td>
+                        <td><%= author.authorName %></td>
 
                         <td>
                           <div>
                             <!-- Edit Button -->
                             <a
-                              href="/authors/edit/<%= author.author_id %>"
+                              href="/authors/edit/<%= author.id %>"
                               class="btn btn-success"
                             >
                               Edit
                             </a>
                             <!-- Delete Button -->
                             <a
-                              href="/authors/delete/<%= author.author_id %>"
+                              href="/authors/delete/<%= author.id %>"
                               class="btn btn-danger"
                             >
                               Delete

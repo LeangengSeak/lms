@@ -24,7 +24,11 @@
           <!-- /.container-fluid -->
           <div class="container mt-5">
             <h1 class="h3 mb-4 text-gray-800">Create Book</h1>
-            <form action="/books/create" method="post">
+            <form
+              action="/books/create"
+              enctype="multipart/form-data"
+              method="post"
+            >
               <!-- Text Input -->
               <div class="form-group">
                 <label for="inputName">Book Name</label>
@@ -37,14 +41,24 @@
                 />
               </div>
 
+              <div class="form-group">
+                <label for="inputCover">Cover Book</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  name="bookCover"
+                  id="inputCover"
+                />
+              </div>
+
               <!-- Select Option 1 -->
               <div class="form-group">
                 <label for="selectOption1">Author</label>
                 <select class="form-control" name="author" id="selectOption1">
                   <option value="">Select your author</option>
                   <% authors.forEach(author => { %>
-                  <option value="<%= author.author_id %>">
-                    <%= author.name %>
+                  <option value="<%= author.id %>">
+                    <%= author.authorName %>
                   </option>
                   <% }) %>
                 </select>
@@ -56,8 +70,8 @@
                 <select class="form-control" name="category" id="selectOption2">
                   <option value="">Select your category</option>
                   <% categories.forEach(category => { %>
-                  <option value="<%= category.category_id %>">
-                    <%= category.name %>
+                  <option value="<%= category.id %>">
+                    <%= category.categoryName %>
                   </option>
                   <% }) %>
                 </select>

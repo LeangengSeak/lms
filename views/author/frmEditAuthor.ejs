@@ -26,17 +26,13 @@
             <%= JSON.stringify(author) %>
             <form action="/authors/edit" method="post">
               <!-- Text Input -->
-              <input
-                type="hidden"
-                name="authorId"
-                value="<%= author.author_id %>"
-              />
+              <input type="hidden" name="authorId" value="<%= author.id %>" />
               <div class="form-group">
                 <label for="inputName">Author Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  value="<%= author.name %>"
+                  value="<%= author.authorName %>"
                   name="authorName"
                   id="inputName"
                   placeholder="Enter your name"

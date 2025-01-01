@@ -22,32 +22,50 @@
           <div class="container-fluid"></div>
           <!-- /.container-fluid -->
           <div class="container mt-5">
-            <%= JSON.stringify(book) %> <%= JSON.stringify(authors) %> <%=
+            <%= JSON.stringify(book) %> 
+            <%= JSON.stringify(authors) %> <%=
             JSON.stringify(categories) %>
             <h1 class="h3 mb-4 text-gray-800">Edit Book</h1>
-            <form action="/books/edit" method="post">
+            <form action="/books/edit" enctype="multipart/form-data" method="post">
               <!-- Text Input -->
               <div class="form-group">
-                <input type="hidden" name="bookId" value="<%= book.book_id %>" />
+                <input type="hidden" name="bookId" value="<%= book.id %>" />
                 <label for="inputName">Book Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  value="<%= book.name %>"
+                  value="<%= book.bookName %>"
                   name="bookName"
                   id="inputName"
                   placeholder="Enter your name"
                 />
               </div>
-
+              <!--  -->
+              <p class="mb-1">Current cover</p>
+               <div class="cover-book-edit mb-1">
+                <img
+                            src="/upload/<%= book.bookCover %>"
+                            alt="cover book"
+                          />
+               </div>
+              <div class="form-group">
+                <label for="inputCover">Choose new cover</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  name="bookCover"
+                  id="inputCover"
+                />
+              </div>
+              <input type="hidden" name="oldCover" value="<%= book.bookCover %>">
               <!-- Select Option 1 -->
               <div class="form-group">
                 <label for="selectOption1">Author</label>
                 <select class="form-control" name="author" id="selectOption1">
                   <option value="">Select your author</option>
                   <% authors.forEach((author)=>{ %>
-                  <option value="<%= author.author_id %>" <%= book.author_id === author.author_id ? 'selected' : ''%>
-                    > <%= author.name %>
+                  <option value="<%= author.id %>" <%= book.authorId === author.id ? 'selected' : ''%>
+                    > <%= author.authorName %>
                   </option>
                   <%}) %>
                 </select>
@@ -59,8 +77,8 @@
                 <select class="form-control" name="category" id="selectOption2">
                   <option value="">Select your category</option>
                   <% categories.forEach((category)=>{ %>
-                    <option value="<%= category.category_id %>" <%= book.category_id === category.category_id ? 'selected' : '' %>>
-                      <%= category.name %>
+                    <option value="<%= category.id %>" <%= book.categoryId === category.id ? 'selected' : '' %>>
+                      <%= category.categoryName %>
                     </option>
                  <%  }) %>
                 </select>
