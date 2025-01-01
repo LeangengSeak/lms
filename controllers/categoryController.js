@@ -1,5 +1,5 @@
 const categoryQuery = require('../resources/categoryQueries')
-
+const vCategory = require('../validation/categoryValidation')
 const getAll = async (req, res) => {
     try {
         const result = await categoryQuery.getAllCategories();
@@ -15,7 +15,11 @@ const getCreate = (req, res) => {
 }
 
 const postCreate = async (req, res) => {
-    const { categoryName } = req.body;
+    const { error, value } = vCategory(req.body)
+    if (error) {
+        return res.status(400).send(error.message)
+    }
+    const { categoryName } = value;
     const arrCategory = [categoryName]
     try {
         await categoryQuery.createCategory(arrCategory);
@@ -39,7 +43,11 @@ const getEdit = async (req, res) => {
 }
 
 const postEdit = async (req, res) => {
-    const { categoryName, categoryId } = req.body;
+    const { error, value } = vCategory(req.body);
+    if (error) {
+        return res.status(400).send(error.message);
+    }
+    const { categoryName, categoryId } = value;
     const arrCategory = [categoryName, categoryId]
     try {
         await categoryQuery.updateCategory(arrCategory);
