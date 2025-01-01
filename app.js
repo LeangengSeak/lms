@@ -1,4 +1,5 @@
 const express = require('express')
+const fileUpload = require('express-fileupload');
 const app = express();
 
 const authRoutes = require('./routes/authRoutes')
@@ -12,6 +13,7 @@ app.set('view engine', 'ejs')
 
 // Middleware
 app.use(express.static('public'))
+app.use(fileUpload())
 app.use(express.urlencoded({ extended: true }))
 
 // Routes
