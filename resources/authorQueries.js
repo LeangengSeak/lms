@@ -3,7 +3,15 @@ const { query } = require('../config/db')
 exports.getAllAuthors = async () => {
     try {
         const res = await query("SELECT * FROM author");
-        return res;
+        // if (res.length === 0) return undefined;
+        let dataArr = [];
+        res.forEach(value => {
+            dataArr.push({
+                id: value.author_id,
+                authorName: value.name
+            })
+        })
+        return dataArr;
     } catch (err) {
         throw err
     }
@@ -12,7 +20,15 @@ exports.getAllAuthors = async () => {
 exports.getById = async (id) => {
     try {
         const res = await query("SELECT * FROM author WHERE author_id = ?", id)
-        return res[0]
+        // if (res.length === 0) return undefined
+        let dataArr = []
+        res.forEach(value => {
+            dataArr.push({
+                id: value.author_id,
+                authorName: value.name
+            })
+        })
+        return dataArr[0];
     } catch (err) {
         throw err
     }
