@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2024 at 11:09 AM
+-- Generation Time: Jan 01, 2025 at 05:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,8 @@ INSERT INTO `author` (`author_id`, `name`) VALUES
 (2, 'George R.R. Martin'),
 (3, 'J.R.R. Tolkien'),
 (4, 'Jane Austen'),
-(5, 'Agatha Christie');
+(5, 'Agatha Christie'),
+(13, 'leangengs');
 
 -- --------------------------------------------------------
 
@@ -52,6 +53,7 @@ INSERT INTO `author` (`author_id`, `name`) VALUES
 CREATE TABLE `book` (
   `book_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `bookCover` varchar(1000) NOT NULL,
   `author_id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -60,12 +62,8 @@ CREATE TABLE `book` (
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`book_id`, `name`, `author_id`, `category_id`) VALUES
-(1, 'Harry Potter and the Philosopher\'s Stone', 1, 1),
-(2, 'A Game of Thrones', 2, 1),
-(3, 'The Hobbit', 3, 5),
-(4, 'Pride and Prejudice', 4, 4),
-(5, 'Murder on the Orient Express', 5, 3);
+INSERT INTO `book` (`book_id`, `name`, `bookCover`, `author_id`, `category_id`) VALUES
+(44, 'The KingSwap007', 'default-cover.jpg', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -83,11 +81,11 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `name`) VALUES
-(1, 'Fantasy'),
 (2, 'Fiction'),
 (3, 'Mystery'),
 (4, 'Romance'),
-(5, 'Adventure');
+(5, 'Adventure'),
+(8, 'Devops');
 
 --
 -- Indexes for dumped tables
@@ -121,19 +119,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `book_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `book_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `category_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
