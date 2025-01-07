@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2025 at 05:11 PM
+-- Generation Time: Jan 07, 2025 at 04:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,8 +41,7 @@ INSERT INTO `author` (`author_id`, `name`) VALUES
 (2, 'George R.R. Martin'),
 (3, 'J.R.R. Tolkien'),
 (4, 'Jane Austen'),
-(5, 'Agatha Christie'),
-(13, 'leangengs');
+(5, 'Agatha Christie');
 
 -- --------------------------------------------------------
 
@@ -57,13 +56,6 @@ CREATE TABLE `book` (
   `author_id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `book`
---
-
-INSERT INTO `book` (`book_id`, `name`, `bookCover`, `author_id`, `category_id`) VALUES
-(44, 'The KingSwap007', 'default-cover.jpg', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -85,7 +77,29 @@ INSERT INTO `category` (`category_id`, `name`) VALUES
 (3, 'Mystery'),
 (4, 'Romance'),
 (5, 'Adventure'),
-(8, 'Devops');
+(8, 'Devops'),
+(10, 'Data analyze');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `password`) VALUES
+(1, 'Leangeng', 'Seak', 'leangeng10@gmail.com', '$2b$10$XPHl2KRGUjPzTRINiiPJ6OhiIDXC4mCRub5aqe4fhVJ0TMSzGpJa2');
 
 --
 -- Indexes for dumped tables
@@ -112,6 +126,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -119,19 +139,25 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `author_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `book_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `book_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `category_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
