@@ -14,7 +14,8 @@ exports.createUser = async (userData) => {
 
 exports.getByEmail = async (email) => {
   try {
-    const sql = "SELECT * FROM `user` WHERE email = ?";
+    const sql =
+      "SELECT user_id, first_name, last_name, email FROM `user` WHERE email = ?";
     const res = await query(sql, email);
     let dataArr = [];
     res.forEach((value) => {
