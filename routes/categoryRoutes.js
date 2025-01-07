@@ -1,20 +1,21 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
 
-const categoryController = require('../controllers/categoryController')
+const categoryController = require("../controllers/categoryController");
+const { requireAuth } = require("../middleware/authMiddleware");
 
 // Read
-router.get('/', categoryController.getAll)
+router.get("/", requireAuth, categoryController.getAll);
 
 // Create
-router.get('/create', categoryController.getCreate)
-router.post('/create', categoryController.postCreate)
+router.get("/create", requireAuth, categoryController.getCreate);
+router.post("/create", requireAuth, categoryController.postCreate);
 
 // Edit
-router.get('/edit/:id', categoryController.getEdit)
-router.post('/edit', categoryController.postEdit)
+router.get("/edit/:id", requireAuth, categoryController.getEdit);
+router.post("/edit", requireAuth, categoryController.postEdit);
 
 // Delete
-router.get('/delete/:id', categoryController.deleteRecord)
+router.get("/delete/:id", requireAuth, categoryController.deleteRecord);
 
-module.exports = router
+module.exports = router;
